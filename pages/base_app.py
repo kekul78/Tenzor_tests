@@ -8,10 +8,16 @@ class BasePage:
         self.driver = driver
         self.base_url = url
 
+    def find_ellement_with_text(self, locator, text, time=20):
+        return WebDriverWait(self.driver, time).until(
+            EC.text_to_be_present_in_element(locator, text),
+            message=f"Элемент {locator} не найден"
+            )
+
     def find_element(self, locator, time=20):
         element = WebDriverWait(self.driver, time).until(
             EC.presence_of_element_located(locator),
-            message=f"Элемент не найден {locator}"
+            message=f"Элемент {locator} не найден"
             )
         self.scroll_to_element(element)
         return element
@@ -19,7 +25,7 @@ class BasePage:
     def find_elements(self, locator, time=20):
         return WebDriverWait(self.driver, time).until(
             EC.presence_of_all_elements_located(locator),
-            message=f"Элементы не найдены {locator}"
+            message=f"Элементы {locator} не найдены"
             )
 
     def go_to_site(self):
