@@ -25,7 +25,7 @@ Dev
 
 Перед запуском необходимо склонировать проект:
 ```bash
-git clone git@github.com:kekul78/foodgram-project-react.git
+git clone git@github.com:kekul78/Tenzor_tests.git
 
 ```
 
