@@ -88,6 +88,9 @@ INFOMSG = {
 
 
 def time_and_chek(max_time):
+    """
+    Функция проверки наличия файла в указанный времменной период.
+    """
     time_now = time()
 
     while time() - time_now <= max_time:

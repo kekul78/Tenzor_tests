@@ -88,6 +88,8 @@ def test_second_route(browser):
 def test_third_route(browser):
     """
     Проверка работы третьего сценария
+    переход по ссылкам, скачивание файла,
+    проверка файла.
     """
     main_page = TestHelper(browser, URL['sbis'])
     main_page.go_to_site()

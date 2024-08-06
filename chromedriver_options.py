@@ -4,6 +4,9 @@ from tests.config import DOWNLOAD_PATH
 
 
 class ChromeOptions:
+    """
+    Класс с настройками ВебДрайвера
+    """
     driver_options = Options()
     driver_options.add_argument("--log-level=3")
     driver_options.add_experimental_option('excludeSwitches',
