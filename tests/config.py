@@ -1,5 +1,13 @@
+import os
+from time import time
+
 from selenium.webdriver.common.by import By
 
+DOWNLOAD_PATH = os.path.join(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+), 'downloads')
+FILE_NAME = 'sbisplugin-setup-web.exe'
+FILE_PATH = os.path.join(DOWNLOAD_PATH, FILE_NAME)
 URL = {
     'sbis': 'https://sbis.ru/',
     'tensor_about': 'https://tensor.ru/about',
@@ -44,7 +52,16 @@ ELEMENT = {
     'region_partners': (
         By.XPATH,
         '//*[@id="city-id-2"]'
-    )
+    ),
+    'download_local': (
+        By.XPATH,
+        '//a[text()="Скачать локальные версии"]'
+    ),
+    'download': (
+        By.XPATH,
+        '//*[@class="sbis_ru-DownloadNew-loadLink__link js-link" '
+        'and contains(text(), "Скачать (Exe")]'
+    ),
 }
 ERRMSG = {
     'block': 'Блок отсутствует',
@@ -53,4 +70,14 @@ ERRMSG = {
     'region_partners': 'Блок партнёров не обновился',
     'region_URL': 'Выбранный регион отсутсвует в URL',
     'region_title': 'Выбранный регион отсутсвует в title',
+    'download': 'Файл не был скачан'
 }
+
+
+def time_and_chek(max_time):
+    time_now = time()
+
+    while time() - time_now <= max_time:
+        if os.path.exists(FILE_PATH):
+            return True
+    return False

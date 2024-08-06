@@ -6,3 +6,4 @@ chromedriver/
 __pycache__/
 .pytest_cache/
 aboba.py
+downloads/

@@ -1,5 +1,7 @@
+import os
+
 from pages.pages import TestHelper
-from tests.config import URL, ELEMENT, ERRMSG
+from tests.config import URL, ELEMENT, ERRMSG, FILE_PATH, time_and_chek
 
 
 def test_first_route(browser):
@@ -31,8 +33,9 @@ def test_second_route(browser):
 
     main_page.go_to_PATH(ELEMENT['contact'])
     assert (
-        main_page.find_element(ELEMENT['region']).text ==
-        'Ярославская обл.'), ERRMSG['region']
+        main_page.find_ellement_with_text(ELEMENT['region'],
+                                          'Ярославская обл.')
+        ), ERRMSG['region']
 
     assert main_page.check_exist_element(
         ELEMENT['block_partners']), ERRMSG['block']
@@ -56,3 +59,21 @@ def test_second_route(browser):
     assert (
         'СБИС Контакты — Камчатский край' in browser.title
     ), ERRMSG['region_title']
+
+
+def test_third_route(browser):
+    main_page = TestHelper(browser, URL['sbis'])
+    main_page.go_to_site()
+
+    main_page.go_to_PATH(ELEMENT['download_local'])
+
+    main_page.go_to_PATH(ELEMENT['download'])
+    assert time_and_chek(20), ERRMSG['download']
+
+    file_text = main_page.find_element(ELEMENT['download']).text
+    file_size = float(file_text.split()[2])
+    downlad_file_size = round((os.path.getsize(FILE_PATH) / 1024**2), 2)
+
+    assert file_size == downlad_file_size
+
+    os.remove(FILE_PATH)
