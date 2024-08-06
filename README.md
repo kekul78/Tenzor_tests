@@ -6,7 +6,7 @@
 Cтруктура репозитория:
 ```
 Dev
- └── Tenzor testis
+ └── Tenzor_testis
      ├── pages
      │   ├── base_app.py          <- Файл с базовыми методами для работы с WebDriver
      │   └── pages.py             <- Файл с локаторами для веб страницы
